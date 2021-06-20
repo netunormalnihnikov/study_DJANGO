@@ -1,0 +1,7 @@
+asgiref==3.3.4
+comtypes==1.1.9
+Django==3.2.4
+lxml==4.6.3
+python-docx==0.8.10
+pytz==2021.1
+sqlparse==0.4.1
