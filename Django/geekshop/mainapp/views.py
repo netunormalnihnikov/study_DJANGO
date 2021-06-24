@@ -2,4 +2,22 @@ from django.shortcuts import render
 
 
 def products(request):
-    return render(request, "mainapp/products.html")
+    title = "продукты/каталог"
+    links_menu = [
+        {'href': 'products_all', 'name': 'все'},
+        {'href': 'products_home', 'name': 'дом'},
+        {'href': 'products_office', 'name': 'офис'},
+        {'href': 'products_modern', 'name': 'модерн'},
+        {'href': 'products_classic', 'name': 'классика'},
+    ]
+    links_tab = [
+        {'href': 'index', 'name': 'домой'},
+        {'href': 'products:index', 'name': 'продукты'},
+        {'href': 'contacts', 'name': 'контакты'}
+    ]
+    context = {
+        'title': title,
+        'links_menu': links_menu,
+        'links_tab': links_tab
+    }
+    return render(request=request, template_name="mainapp/products.html", context=context)
