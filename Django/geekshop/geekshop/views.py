@@ -1,8 +1,11 @@
 from django.shortcuts import render
 
+from mainapp.models import Product
+
 
 def index(request):
     title = "магазин"
+    products = Product.objects.all()[:3]
     links_tab = [
         {'href': 'index', 'name': 'домой'},
         {'href': 'products:index', 'name': 'продукты'},
@@ -10,7 +13,8 @@ def index(request):
     ]
     context = {
         'title': title,
-        'links_tab': links_tab
+        'links_tab': links_tab,
+        'products': products,
     }
 
     return render(request, "geekshop/index.html", context=context)
