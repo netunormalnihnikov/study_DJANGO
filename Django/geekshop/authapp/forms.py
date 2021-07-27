@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 from .models import ShopUser
+import random, hashlib
 
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -12,8 +13,8 @@ class ShopUserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(ShopUserLoginForm, self).__init__(*args, **kwargs)
 
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+        for field_name, filed in self.fields.items():
+            filed.widget.attrs['class'] = 'form-control'
 
 
 class ShopUserRegisterForm(UserCreationForm):
@@ -34,6 +35,15 @@ class ShopUserRegisterForm(UserCreationForm):
 
         return data
 
+    def save(self):
+        user = super(ShopUserRegisterForm, self).save()
+
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
+        user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
+        user.save()
+        return user
+
 
 class ShopUserEditForm(UserChangeForm):
     class Meta:
@@ -43,7 +53,7 @@ class ShopUserEditForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = ''
             field.help_text = ''
             if field_name == 'password':
                 field.widget = forms.HiddenInput()
