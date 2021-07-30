@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from basketapp.models import Basket
+# from basketapp.models import Basket
 from mainapp.models import Product
 
 
