@@ -2,6 +2,7 @@ from basketapp.models import Basket
 
 
 def basket(request):
+    print('ПРИВЕТ из контекстного процессора')
     basket = []
 
     if request.user.is_authenticated:
