@@ -179,7 +179,6 @@
                     }
                 });
             }
-
             options.formTemplate = template;
 
             var addButtonHTML = '<a class="' + options.addCssClass + '" href="javascript:void(0)">' + options.addText + '</a>';
