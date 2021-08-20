@@ -23,7 +23,7 @@ class TestMainappSmoke(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['user'].is_anonymous)
-        self.assertEqual(response.context['title'], 'магазин')
+        self.assertEqual(response.context['title'], 'магазиыыын')
         self.assertNotContains(response, 'admin', status_code=200)
 
         self.client.login(username='tarantino', password='123')
